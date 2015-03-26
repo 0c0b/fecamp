@@ -42,18 +42,47 @@ console.log(randomFloat(5,10));
 	// 사용예:
 	// var date = new Date(1426863600000);
 	// console.log(formatDate(date)); // 출력 결과: 2015년 3월 21일 토요일
-
+function formatDate(date){
+	var date = new Date(date);
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	var daynum = date.getDate();
+	var day = date.getDay();
+	var dayname = ['일','월','화','수','목','금','토'];
+	return (year+'년 '+month+'월 '+daynum+'일 '+dayname[day]+'요일');
+}
+var date = new Date(1426863600000);
+console.log(formatDate(date));
 	// 문제5: 생일을 입력하면 살아온 날짜를 숫자로 반환하는 함수 lifeTime()을 작성하라.
 	// 태어난 날을 1일로 센다.
 	// 사용예: console.log( lifeTime(1980, 2, 13) );
 	// 힌트: 테스트 할 때는 어제나 2일 전 등 가까운 날짜를 입력한 후 테스트 해보는 것이 편합니다.
-
-
+function lifeTime(y,m,d){
+	var 생일 = new Date(y,m-1,d);
+	var 지금 = new Date();
+	var 산날 = 지금.getTime()-생일.getTime();
+	return Math.ceil(산날/1000/60/60/24);
+}
+console.log( lifeTime(2014, 5, 3) );
 	// 문제6: 인수로 전달된 시각까지 앞으로 남은 시간을 "1시간 10분 35초"처럼 1초마다 카운트다운하며
 	// 표시하는 countDown() 함수를 작성하라(실행 예는 https://youtu.be/-cdVk4KMPXw 참고).
 	// 힌트1: 문자열 표시는 console.log와 사용법이 똑같은 log() 함수를 사용해 출력하면 된다.
 	// 힌트2: countDown() 함수는 만들어두기만 하면 자동으로 실행된다.
 	// 사용예: countDown(2015, 3, 26, 13); // 3월 26일 오후 1시까지 남은 시간 표시
+function countDown(y,m,d,t){
+	var endTime = new Date(y,m-1,d,t);
+	var nowTime = new Date();
+	var sec1 = endTime.getTime();
+	var sec2 = nowTime.getTime();
+	var interval = sec1 - sec2;
+	var 시간 = Math.floor(interval/1000/60/60);
+	interval = interval - (시간*(1000*60*60));
+	var 분 = Math.floor(interval/1000/60);
+	interval = interval - (분*(1000*60));
+	var 초 = Math.floor(interval/1000);
+	console.log(시간+'시간'+분+'분'+초+'초');
+	setTimeout(countDown,1000);
+}
 
 	</script>
 </head>
