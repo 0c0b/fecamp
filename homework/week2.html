@@ -19,6 +19,12 @@ function tick(){
 	setTimeout(function(){console.log('틱');},1000);
 }
 tick();
+/*function tick(){
+	console.log('틱');
+	setTimeout(tick,1000);
+}
+tick();*/
+
 	// 문제2: 수학 관련 계산을 담당하는 Math 객체에는 원주율을 나타내는 Math.PI라는 값이 있다.
 	// 반지름 값 r을 입력할 때 원의 넓이를 반환하는 함수 circleArea() 함수를 작성하라.
 	// 힌트: 원의 넓이 = 반지름의_제곱 * 원주율
@@ -80,10 +86,57 @@ function countDown(y,m,d,t){
 	var 분 = Math.floor(interval/1000/60);
 	interval = interval - (분*(1000*60));
 	var 초 = Math.floor(interval/1000);
+	log(시간+'시간'+분+'분'+초+'초');
+	setTimeout(function(){countDown(y,m,d,t)},1000); //자기 자신을 부르는 함수?
+}
+countDown(2015, 3, 26, 13);
+/*
+function countDown(y,m,d,t){
+	var endTime = new Date(y,m-1,d,t);
+	var nowTime = new Date();
+	var sec1 = endTime.getTime();
+	var sec2 = nowTime.getTime();
+	var interval = sec1 - sec2;
+	var 시간 = Math.floor(interval/1000/60/60);
+	interval = interval - (시간*(1000*60*60));
+	var 분 = Math.floor(interval/1000/60);
+	interval = interval - (분*(1000*60));
+	var 초 = Math.floor(interval/1000);
 	console.log(시간+'시간'+분+'분'+초+'초');
 	setTimeout(countDown,1000);
 }
+console.log(countDown(2015, 3, 26, 13));
+*/
 
+
+//풀이
+
+/*
+1)먼저 틀을 만든다.
+function countDown(년, 월, 일, 시) {
+	log('1시간 10분 35초');
+}
+
+2)함수를 호출하는 것을 만든다.
+function countDown(년, 월, 일, 시) {
+	log('1시간 10분 35초');
+	setTimeout( function(){countDown(년, 월, 일, 시)}, 1000);
+}
+
+3)함수를 호출하는 것을 만든다.
+function countDown(년, 월, 일, 시) {
+	var 날짜, 현재, 남은시, 남은분, 남은초, 남은밀리초;
+	날짜 = new Date (년, 월, 일, 시);
+	현재 = new Date ();
+	남은밀리초 = 날짜 - 현재;
+	남은초 = Math.round((남은밀리초/1000) % 60);
+	남은분 = Math.floor((남은밀리초/1000/60) % 60);
+	남은시 = Math.floor(남은밀리초/1000/60/60);
+	log(남은시+'시간'+남은분+'분'+남은초+'초');
+	setTimeout( function(){countDown(년, 월, 일, 시)}, 1000);
+}
+
+*/
 	</script>
 </head>
 <body>
