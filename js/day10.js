@@ -130,6 +130,20 @@ jQuery(function($){
 	//$('h2:first').offset(); 첫번째 h2의 위치를 알 수 있다..
 
 
+	//모든 <a>태그를 선택한 후 <i class="fa fa-external-link"></i>태그를
+	//선택한 <a>태그의 마지막 자식요소로 추가하라
+	//$('a').append('<i class="fa fa-external-link"></i>');
+
+	//그러나 ... 외부 링크로 가는 것에만 추가되어야 한다...
+	$('a[href^="http:"]').attr('target','_blank').append('<i class="fa fa-external-link"></i>');
 
 });
 //똑같은 코드는 가능하면 반복하지 않는 것이 좋다.
+
+
+
+//$('ul:first').append('<li>새아이템</li>'); - 뒤에 추가됨
+//$('ul:first').prepend('<li>새아이템</li>'); - 앞에 추가됨
+//$('ul:first li:last-child').prependTo('ul:first'); - 있던걸 빼서 맨앞으로 옮긴다(넣는다).
+
+
