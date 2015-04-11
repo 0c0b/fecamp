@@ -139,34 +139,21 @@ jQuery(function($){
 		startY = event.pageY;
 
 		//현재 #box의 css left, top의 값은?
-		var $this = $(this); //정확하게는 마우스 다운 된 그 앨리먼트
-		//console.log($this)
+		var $this = $(this);
+		console.log($this)
 		var startLeft = parseInt($this.css('left'));
 		var startTop  = parseInt($this.css('top'));
-
-		if (isNaN(startLeft)) startLett = 0;
-		if (isNaN(startTop)) startTop = 0;
-		//position이 absolute,relative,fixed가 아니면 relative 설정
-		var position = $this.css('position');
-		if (position != 'absolute' && position != 'relative' && position != 'fixed'){
-			$this.css('position','relative');
-		}
-
-
-
 		$(document).on('mousemove.dragndrop', function(event){
 			//현재 커서의 위치.. event.pageX
 			var nowX = event.pageX - startX;
 			var nowY= event.pageY-startY;
-			$this.css('left',startLeft+nowX).css('top',startTop+nowY);
+			$this.css('left',startLeft+nowX);
+			$this.css('top',startTop+nowY);
 		});
 		$(document).on('mouseup.dragndrop', function(event){
-			//마우스 버튼을 뗄 때 시프트키가 눌려 있어면 처음 위치로 돌아감
-			if (event.shiftKey){
-				$this.css('top',startTop).css('left',startLeft);
-			}
 			$(document).off('.dragndrop');
 		});
+
 	})
 });
 
