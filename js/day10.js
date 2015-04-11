@@ -53,13 +53,13 @@ jQuery(function($){
 	$(document).on('keydown', function(event){
 		var $box = $('#box');
 		var windowW = $(window).width();
-		var h2Offset = $('h2:first').offset();
-		var h2H = h2Offset.height();
+		//var h2H = h2Offset.height();
 		//내가 했던것 ...
 		// var startLeft = parseInt($box.css('left'));
 		// var startTop  = parseInt($box.css('top'));
 		//console.log(startTop, startLeft);
 		var offset = $box.offset(), left = offset.left, top = offset.top;
+		var h2offset = $('h2:first').offset(), h2top = h2offset.top;
 			switch (event.which){
 				case 37: //왼쪽
 					if (left - 20 < 0){
@@ -89,19 +89,25 @@ jQuery(function($){
 					$box.stop().animate({'left': left}, 50);
 					break;
 					case 40: //아래쪽
-					if (top-50 > h2H){
-						top = h2H;
+					if (top+50 > h2top){
+						top = h2top;
 					} else {
 						top = top + 50;
 						//event.preventDefault();
 					};
 					$box.stop().animate({'top': top}, 50);
 					break;
-			}
+			};
 			//박스의 위치
-			//애니메이션이 시작하기 전에... 범위를... 계산이 끝나야 한다.
+			//애니메이션이 시작하기 전에... 범위 계산이 끝나야 한다.
 			//박스의 위치가 윈도우보다 넘어가지 않게
 			//if ()
+
+			$('.top').on('click', function(event){
+				event.preventDefault();
+				//$(window).scrollTop(0);
+				$('html,body').animate({'scrollTop': 0}, 500);
+			});
 	});	
 
 
