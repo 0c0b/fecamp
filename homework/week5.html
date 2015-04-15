@@ -65,11 +65,24 @@
 		/*
 		 * TODO: 문서가 스크롤 될 때
 		 */
-
 		// TODO: window의 스크롤 위치를 확인하여
-
-		// TODO: 남은 스크롤 높이가 100px 보다 작으면 원래 있던 상품 목록($items)을
+		 	$(window).scroll(function(event){
+		 		var scrH = $(document).scrollTop();
+		 		var docH = $(document).height();
+		 		//console.log(docH);
+		 		var winH = $(window).height();
+		 		//console.log(winH);
+		 		var leftScr = docH-scrH-winH
+		 		//console.log(leftScr);
+		// TODO: 남은 스크롤 높이가 100px 보다 작으면 
+		 		if(leftScr<100){
+		 			//console.log('작지렁')
+		// 원래 있던 상품 목록($items)을 			
 		// 복제하여 .stream 목록에 추가하면 된다.
+		 			$items.clone().fadeIn(1000).appendTo($stream);
+		 		};
+		 	});
+
 		// 힌트: 남은 스크롤 높이 = 문서 전체의 높이 - 수직 스크롤 위치 - 창의 높이 <- 이와 같이 구할 수 있다.
 
 		// ADV: 위 과제를 해결한 후 고급 도전 과제가 필요한 분은 영상 마지막에 보이는 것처럼
