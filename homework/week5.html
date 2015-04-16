@@ -53,7 +53,19 @@
 	<script>
 	jQuery(function($){
 		var $stream = $('ul.stream'), $items = $stream.find('>li');
-
+/*그냥봐라...var data = {
+			items : [
+				{id: 1, name: '아이템 #1', images:'http://lorempixel.com/292/292/cats' price:'12100'}
+				]
+		};
+		for(var i=0; i<100; i++) {
+			var rand = Math.floor(Math.random()*100);
+			var item = {
+				id: data.items.length + 1,
+				name: ['아이템','상품','프로덕트','제품'][rand % 4]+' #'+(data.items.length + 1)
+			}
+		}
+*/
 		/*
 		 * 아래에 과제 코드를 입력합니다.
 		 * 본 과제는 목요일 수업 시간에 풀이 할 예정이므로 목요일 수업 전에
@@ -67,7 +79,9 @@
 		 */
 		// TODO: window의 스크롤 위치를 확인하여
 		 	$(window).scroll(function(event){
+		 		//$(window).on('scroll', function(event){}) 내가 쓴것은 이것의 축약형인데.. on 형태라고함. 이걸쓰는거를 추천함.
 		 		var scrH = $(document).scrollTop();
+		 		//선생님이 쓴 것 .. var scrollTop = $(window).scrollTop();
 		 		var docH = $(document).height();
 		 		//console.log(docH);
 		 		var winH = $(window).height();
@@ -80,7 +94,7 @@
 		// 원래 있던 상품 목록($items)을 			
 		// 복제하여 .stream 목록에 추가하면 된다.
 		 			$items.clone().fadeIn(1000).appendTo($stream);
-		 		};
+		 		}
 		 	});
 
 		// 힌트: 남은 스크롤 높이 = 문서 전체의 높이 - 수직 스크롤 위치 - 창의 높이 <- 이와 같이 구할 수 있다.
