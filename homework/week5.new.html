@@ -52,7 +52,7 @@
 	<script>jQuery.noConflict();</script>
 	<script>
 	jQuery(function($){
-		var $stream = $('ul.stream'), $items = $stream.find('>li');
+		var $stream = $('ul.stream'), $tpl = $stream.find('>li').remove();
 		var data = {
 			items : [
 				{id: 1, name: '아이템 #1', image: 'http://lorempixel.com/292/292/cats', price: '12100'}
@@ -83,13 +83,28 @@
 		/*
 		 * TODO: 문서가 스크롤 될 때
 		 */
-		$(window).on('scroll', function(event){
-			var scrollTop = $(window).scrollTop();
+		var page = 1, itemsPerPage = 12;
+		var $win = $(window), $doc = $(document);
 
-			if ($(document).height() - scrollTop - $(window).height() < 100) {
-				$items.clone().fadeIn(1000).appendTo($stream);
+		$win.on('scroll', function(event){
+			var scrollTop = $win.scrollTop(), currentData, start, end;
+
+			start = (page - 1)*itemsPerPage;
+			end = start + itemsPerPage;
+			currentData = data.items.slice(start, end);
+
+			if ($doc.height() - scrollTop - $win.height() < 100) {
+				for (var i=0; i<currentData.length; i++){
+					$tpl.clone()
+						.find('img').attr('src',currentData[i].image).end()
+						.find('.title').text(currentData[i].name).end()
+						.find('.price').text(currentData[i].price+'원').end()
+						.appendTo($stream);
+				}
+				page += 1;
 			}
 		});
+		$win.trigger('scroll');
 
 		// TODO: window의 스크롤 위치를 확인하여
 
